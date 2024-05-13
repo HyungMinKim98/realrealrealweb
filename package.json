@@ -1,0 +1,46 @@
+{
+  "name": "react-boiler-plate",
+  "version": "1.0.0",
+  "description": "react boiler plate",
+  "main": "index.js",
+  "engine": {
+    "node": "10.16.0",
+    "npm": "6.9.0"
+  },
+  "scripts": {
+    "start": "node server/index.js",
+    "backend": "nodemon server/index.js",
+    "frontend": "npm run start --prefix client",
+    "dev": "concurrently \"npm run backend\" \"npm run start --prefix client\""
+  },
+  "author": "John ahn",
+  "license": "ISC",
+  "dependencies": {
+    "@fullcalendar/daygrid": "^6.1.11",
+    "@fullcalendar/react": "^6.1.11",
+    "antd": "^5.17.0",
+    "axios": "^1.6.8",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.18.3",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.5",
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.30.1",
+    "mongoose": "^5.4.20",
+    "multer": "^1.4.5-lts.1",
+    "mutationobserver-shim": "^0.3.7",
+    "react": "^18.2.0",
+    "react-redux": "^9.1.1",
+    "react-slick": "^0.30.2",
+    "saslprep": "^1.0.3",
+    "slick-carousel": "^1.8.1",
+    "supports-color": "^7.1.0"
+  },
+  "devDependencies": {
+    "concurrently": "^4.1.0",
+    "http-proxy-middleware": "^3.0.0",
+    "nodemon": "^1.19.1"
+  }
+}

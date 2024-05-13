@@ -1,0 +1,113 @@
+/* src/pages/EditProfilePage/EditProfilePage.css */
+
+.edit-profile-container {
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 800px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  .edit-profile-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .profile-section {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .profile-title {
+    margin-bottom: 20px;
+  }
+  
+  .profile-info {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: row;
+    gap: 20px;
+  }
+  
+  .profile-pic-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .default-profile-pic, .profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+  }
+  
+  .default-profile-pic {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ccc;
+    font-size: 4rem;
+    color: #fff;
+  }
+  
+  .user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  
+  .user-info label {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+  }
+  
+  .user-info label span {
+    width: 100px;
+    text-align: left;
+  }
+  
+  .user-info input, .user-info select {
+    padding: 5px;
+    margin-left: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .genre-checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-left: 10px;
+  }
+  
+  .genre-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .file-input-container {
+    margin-top: 10px;
+  }
+  
+  .save-button {
+    margin-top: 20px;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .save-button:hover {
+    background-color: #0056b3;
+  }
+  

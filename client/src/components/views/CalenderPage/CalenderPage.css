@@ -1,0 +1,8 @@
+.react-calendar {
+    border: 1px solid #f0f0f0;
+    max-width: 100%;
+    background: white;
+    border-radius: 10px;
+}
+
+/* Additional styling can go here */

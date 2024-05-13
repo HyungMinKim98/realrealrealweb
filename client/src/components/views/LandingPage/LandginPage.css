@@ -1,0 +1,24 @@
+
+.slick-slide {
+    margin: 0 10px;
+  }
+  
+  .slick-list {
+    margin: 0 -10px;
+  }
+  
+  .slick-track {
+    display: flex;
+  }
+  
+  .slick-prev,
+  .slick-next {
+    width: 25px;
+    height: 25px;
+  }
+  
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 25px;
+    color: #000;
+  }
