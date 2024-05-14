@@ -34,44 +34,49 @@ const DetailPage = () => {
 
   const renderDetailInfo = (title, value) => {
     return (
-      <List.Item>
-        <strong>{title}:</strong> {value || 'N/A'}
+      <List.Item className="detail-list-item">
+        <strong className="detail-info-title">{title}:</strong> <span className="detail-info-value">{value || 'N/A'}</span>
       </List.Item>
     );
   };
 
   return (
-    <div style={{ width: '85%', margin: '3rem auto' }}>
+    <div className="detail-page">
       {details && (
-        <div>
-          <Title level={2}>{details.title || details.name}</Title>
-          <img
-            src={`https://image.tmdb.org/t/p/w500${details.poster_path}`}
-            alt={details.title || details.name}
-            style={{ width: '300px' }}
-          />
-          <Paragraph style={{ marginTop: '1rem' }}>{details.overview}</Paragraph>
-          <Button
-            href={`https://www.themoviedb.org/${type}/${id}`}
-            target="_blank"
-          >
-            Visit TMDB Page
-          </Button>
+        <div className="detail-content">
+          <div className="detail-poster-container">
+            <img
+              src={`https://image.tmdb.org/t/p/w500${details.poster_path}`}
+              alt={details.title || details.name}
+              className="detail-poster"
+            />
+          </div>
+          <div className="detail-info">
+            <Title level={2} className="detail-title">{details.title || details.name}</Title>
+            <Paragraph className="detail-overview">{details.overview}</Paragraph>
+            <Button
+              href={`https://www.themoviedb.org/${type}/${id}`}
+              target="_blank"
+              className="tmdb-button"
+            >
+              Visit TMDB Page
+            </Button>
 
-          <Divider />
+            <Divider />
 
-          <List>
-            {renderDetailInfo('Original Title', details.original_title || details.original_name)}
-            {renderDetailInfo('Release Date', details.release_date || details.first_air_date)}
-            {renderDetailInfo('Genres', details.genres?.map((genre) => genre.name).join(', ') || 'N/A')}
-            {renderDetailInfo('Original Language', details.original_language)}
-            {renderDetailInfo('Popularity', details.popularity)}
-            {renderDetailInfo('Vote Average', details.vote_average)}
-            {renderDetailInfo('Vote Count', details.vote_count)}
-            {renderDetailInfo('Runtime', `${details.runtime || details.episode_run_time?.[0] || 'N/A'} minutes`)}
-            {renderDetailInfo('Status', details.status)}
-            {renderDetailInfo('Tagline', details.tagline)}
-          </List>
+            <List className="detail-list">
+              {renderDetailInfo('Original Title', details.original_title || details.original_name)}
+              {renderDetailInfo('Release Date', details.release_date || details.first_air_date)}
+              {renderDetailInfo('Genres', details.genres?.map((genre) => genre.name).join(', ') || 'N/A')}
+              {renderDetailInfo('Original Language', details.original_language)}
+              {renderDetailInfo('Popularity', details.popularity)}
+              {renderDetailInfo('Vote Average', details.vote_average)}
+              {renderDetailInfo('Vote Count', details.vote_count)}
+              {renderDetailInfo('Runtime', `${details.runtime || details.episode_run_time?.[0] || 'N/A'} minutes`)}
+              {renderDetailInfo('Status', details.status)}
+              {renderDetailInfo('Tagline', details.tagline)}
+            </List>
+          </div>
         </div>
       )}
     </div>

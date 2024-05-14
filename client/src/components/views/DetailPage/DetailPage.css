@@ -1,37 +1,84 @@
-/* src/pages/DetailPage/DetailPage.css */
-
 .detail-page {
-    width: 85%;
-    margin: 3rem auto;
-  }
-  
-  .detail-header {
-    text-align: center;
-  }
-  
-  .detail-content {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
-  }
-  
-  .detail-poster {
-    width: 300px;
-    border-radius: 8px;
-  }
-  
-  .detail-info {
-    flex: 1;
-    margin-left: 2rem;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .detail-info p {
-    margin-bottom: 0.5rem;
-  }
-  
-  .ant-list-item {
-    padding: 0.5rem 0;
-  }
-  
+  width: 85%;
+  margin: 3rem auto;
+  background-color: #f4f4f4;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: #444;
+  font-family: 'Arial, sans-serif';
+}
+
+.detail-content {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+}
+
+.detail-poster-container {
+  flex: 0 0 auto;
+  margin-right: 2rem;
+}
+
+.detail-poster {
+  width: 450px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.detail-info {
+  flex: 1;
+}
+
+.detail-title {
+  margin-bottom: 1rem;
+  color: #222;
+}
+
+.detail-overview {
+  margin: 1rem 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.tmdb-button {
+  display: block;
+  background-color: #01b4e4;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  width: 150px;;
+  text-align: center;
+}
+
+.detail-list {
+  width: 100%;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.detail-list-item {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.detail-list-item:last-child {
+  border-bottom: none;
+}
+
+.detail-info-title {
+  color: #333;
+  margin-right: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.detail-info-value {
+  font-size: 1.1rem;
+  color: #666;
+}
