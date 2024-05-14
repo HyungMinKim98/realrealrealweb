@@ -6,6 +6,7 @@ const { Diary } = require("../models/Diary");
 const { auth } = require("../middleware/auth");
 const multer = require("multer");
 const path = require("path");
+const { message } = require('antd');
 
 // 파일 저장을 위한 Multer 설정
 const storage = multer.diskStorage({
@@ -63,16 +64,23 @@ router.post('/uploadDiary', (req, res) => {
       filePath: req.file ? req.file.path : '',
       fileName: req.file ? req.file.filename : ''
   });
+  // diary.save((err, doc) => {
+//       if (err) {
+//           console.error("Error saving diary:", err);
+//           return res.status(400).json({ success: false, message: "Failed to save diary", error: err.message });
+//       }
+//       res.status(200).json({ success: true, doc });
+//   });
+// });
 
-  diary.save((err, doc) => {
-      if (err) {
-          console.error("Error saving diary:", err);
-          return res.status(400).json({ success: false, message: "Failed to save diary", error: err.message });
-      }
-      res.status(200).json({ success: true, doc });
-  });
+diary.save((err, doc) => {
+  if (err) {
+    console.error("Error saving diary:", err);
+    return res.status(400).json({ success: false, message: "Failed to save diary", error: err.message });
+  }
+  res.status(200).json({ success: true, doc });
 });
-
+});
 
 // 일기 상세 정보 엔드포인트
 router.post("/getDiaryDetail", (req, res) => {
