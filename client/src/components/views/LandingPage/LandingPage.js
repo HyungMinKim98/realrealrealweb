@@ -1,7 +1,7 @@
 // src/pages/LandingPage/LandingPage.js
 
 import React, { useEffect, useState } from 'react';
-import { Card, Avatar, Typography } from 'antd';
+import { Card, Avatar, Typography,Button, Row, Col } from 'antd';
 import axios from 'axios';
 import moment from 'moment';
 import Slider from 'react-slick';
@@ -14,6 +14,8 @@ function LandingPage() {
   const [Diary, setDiarys] = useState([]);
   const [movies, setMovies] = useState([]); // 초기값을 빈 배열로 명확히 설정
   const [tvShows, setTvShows] = useState([]); // 초기값을 빈 배열로 명확히 설정
+  const [currentPageDiary, setCurrentPageDiary] = useState(1);
+  const itemsPerPage = 6;
   const apiKey = '50aaab29ad70cc1875e49e7512650e80'; // .env 대신 API 키를 직접 입력
 
   useEffect(() => {
@@ -103,37 +105,26 @@ function LandingPage() {
     ],
   };
 
-  // const renderDiaryCards = Diary.map((diary, index) => (
-  //   <Card
-  //     key={diary._id}
-  //     hoverable
-  //     style={{ width: 180, marginBottom: 16 }}
-  //     cover={<img alt="example" src={diary.image} />}
-  //   >
-  //     <Meta
-  //       avatar={<Avatar src={diary.writer.image} />}
-  //       title={<a href={`/diary/${diary._id}`}>{diary.title}</a>}
-  //       description={`${diary.writer.name} - ${moment(diary.createdAt).format(
-  //         'MMM Do YY'
-  //       )}`}
-  //     />
-  //   </Card>
-  // ));
-  const renderDiaryCards = Diary.map((diary) => (
-    <Card
-      key={diary._id}
-      hoverable
-      className="card-container"
-      cover={<img alt="example" src={diary.image} />}
-    >
-      <Meta
-        avatar={<Avatar src={diary.writer.image} />}
-        title={<a href={`/diary/${diary._id}`}>{diary.title}</a>}
-        description={`${diary.writer.name} - ${moment(diary.createdAt).format(
-          'MMM Do YY'
-        )}`}
-      />
-    </Card>
+  const renderItems = (items, currentPage) => {
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    return items.slice(indexOfFirstItem, indexOfLastItem);
+  };
+
+const renderDiaryCards = renderItems(Diary, currentPageDiary).map((diary) => (
+    <Col key={diary._id} span={4}>
+      <Card
+        hoverable
+        style={{ width: 180, marginBottom: 16 }}
+        cover={<img alt="diary" src={diary.image} />}
+      >
+        <Meta
+          avatar={<Avatar src={diary.writer.image} />}
+          title={<a href={`/diary/${diary._id}`}>{diary.title}</a>}
+          description={`${diary.writer.name} - ${moment(diary.createdAt).format('MMM Do YY')}`}
+        />
+      </Card>
+    </Col>
   ));
 
   const renderMovieCards = movies.map((movie) => (
@@ -171,10 +162,33 @@ function LandingPage() {
       <Meta title={tvShow.name} />
     </Card>
   ));
+
+  const renderPageNumbers = (totalItems, currentPage, setCurrentPage) => {
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
+      pageNumbers.push(
+        <Button
+          key={i}
+          type={i === currentPage ? 'primary' : 'default'}
+          onClick={() => setCurrentPage(i)}
+          style={{ margin: '0 5px' }}
+        >
+          {i}
+        </Button>
+      );
+    }
+    return pageNumbers;
+  };
+
   return (
     <div style={{ width: '85%', margin: '3rem auto' }}>
       <Title level={2}>Recommended Diaries</Title>
+
       <Slider {...sliderSettings}>{renderDiaryCards}</Slider>
+      <Row gutter={[16, 16]}>{renderDiaryCards}</Row>
+      <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+        {renderPageNumbers(Diary.length, currentPageDiary, setCurrentPageDiary)}
+      </div>
       <Title level={2} style={{ marginTop: '2rem' }}>
         Featured Movies
       </Title>
