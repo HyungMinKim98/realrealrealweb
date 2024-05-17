@@ -3,6 +3,7 @@ import { Card, Avatar, Typography, Divider, Button, Row, Col } from 'antd';
 import axios from 'axios';
 import moment from 'moment';
 import { PrivacyOptions, CategoryOptions, GenreOptions } from '../DiaryEditPage/Options';
+import { previewImage } from 'antd/lib/upload/utils';
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -49,6 +50,17 @@ function DetailDiaryPage(props) {
         >
           <Title level={2} style={{ textAlign: 'center', fontWeight: 'bold', marginBottom: '1rem' }}>{DiaryDetail.title}</Title>
           <Divider />
+          <div style={{ textAlign: 'center', marginBottom: '1rem' }}>
+            {DiaryDetail.filePath && (
+              <img
+                src={`/${DiaryDetail.filePath}`}
+                // src = {DiaryDetail.preview}
+                alt="Preview"
+                style={{ width: '100%', maxHeight: '400px', objectFit: 'cover', borderRadius: 8 }}
+              />
+            )}
+          </div>
+
           <Paragraph style={{ fontSize: '16px', lineHeight: '1.6' }}>
             {DiaryDetail.description}
           </Paragraph>

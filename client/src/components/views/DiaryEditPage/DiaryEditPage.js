@@ -34,6 +34,8 @@ function DiaryEditPage(props) {
           setGenre(genre);
           setRating(rating);
           setFilePath(filePath);
+          setPreview(`/${filePath}`);
+
         } else {
           alert('Failed to fetch diary details');
         }
@@ -71,6 +73,14 @@ function DiaryEditPage(props) {
       .then(response => {
         if (response.data.success) {
           setFilePath(response.data.url); // 서버로부터 받은 URL을 상태에 저장
+          setPreview(`/${response.data.url}`);
+            // 이미지 미리보기 설정
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setPreview(reader.result);
+            };
+            reader.readAsDataURL(files[0]);
+
         } else {
           alert('Failed to upload file');
         }
@@ -133,8 +143,8 @@ function DiaryEditPage(props) {
             {FilePath && (
               <div style={{ marginLeft: '2rem' }}>
                 <img
-                  src={`/${FilePath}`}
-                  alt="thumbnail"
+                  src={Preview}
+                  alt="Preview"
                   style={{ width: '300px', height: '240px', objectFit: 'cover', borderRadius: 8 }}
                 />
               </div>

@@ -13,7 +13,7 @@ const { Meta } = Card;
 function LandingPage() {
   const [Diary, setDiarys] = useState([]);
   const [movies, setMovies] = useState([]); // 초기값을 빈 배열로 명확히 설정
-  const [dramas, setDramas] = useState([]); // 초기값을 빈 배열로 명확히 설정
+  const [tvShows, setTvShows] = useState([]); // 초기값을 빈 배열로 명확히 설정
   const apiKey = '50aaab29ad70cc1875e49e7512650e80'; // .env 대신 API 키를 직접 입력
 
   useEffect(() => {
@@ -46,22 +46,22 @@ function LandingPage() {
       }
     };
 
-    const fetchDramas = async () => {
+    const fetchTvShows = async () => {
       try {
         const url = `https://api.themoviedb.org/3/tv/popular?api_key=${apiKey}&language=ko-KO&page=1`;
         const response = await fetch(url);
         const data = await response.json();
         if (data.results) {
-          setDramas(data.results);
+          setTvShows(data.results);
         } else {
-          console.error('Failed to fetch dramas:', data);
+          console.error('Failed to fetch TvShows:', data);
         }
       } catch (error) {
-        console.error('Error fetching dramas:', error);
+        console.error('Error fetching TvShows:', error);
       }
     };
     fetchMovies();
-    fetchDramas();
+    fetchTvShows();
   }, []);
 
   const sliderSettings = {
@@ -103,11 +103,27 @@ function LandingPage() {
     ],
   };
 
-  const renderDiaryCards = Diary.map((diary, index) => (
+  // const renderDiaryCards = Diary.map((diary, index) => (
+  //   <Card
+  //     key={diary._id}
+  //     hoverable
+  //     style={{ width: 180, marginBottom: 16 }}
+  //     cover={<img alt="example" src={diary.image} />}
+  //   >
+  //     <Meta
+  //       avatar={<Avatar src={diary.writer.image} />}
+  //       title={<a href={`/diary/${diary._id}`}>{diary.title}</a>}
+  //       description={`${diary.writer.name} - ${moment(diary.createdAt).format(
+  //         'MMM Do YY'
+  //       )}`}
+  //     />
+  //   </Card>
+  // ));
+  const renderDiaryCards = Diary.map((diary) => (
     <Card
       key={diary._id}
       hoverable
-      style={{ width: 180, marginBottom: 16 }}
+      className="card-container"
       cover={<img alt="example" src={diary.image} />}
     >
       <Meta
@@ -120,11 +136,11 @@ function LandingPage() {
     </Card>
   ));
 
-  const renderMovieCards = movies.map((movie, index) => (
+  const renderMovieCards = movies.map((movie) => (
     <Card
       key={movie.id}
       hoverable
-      style={{ width: 180 }}
+      className="card-container"
       cover={
         <a href={`/detail/movie/${movie.id}`}>
           <img
@@ -138,24 +154,23 @@ function LandingPage() {
     </Card>
   ));
 
-  const renderDramaCards = dramas.map((drama, index) => (
+  const renderTvShowsCards = tvShows.map((tvShow) => (
     <Card
-      key={drama.id}
+      key={tvShow.id}
       hoverable
-      style={{ width: 180 }}
+      className="card-container"
       cover={
-        <a href={`/detail/tv/${drama.id}`}>
+        <a href={`/detail/tv/${tvShow.id}`}>
           <img
-            alt={drama.title}
-            src={`https://image.tmdb.org/t/p/w500${drama.poster_path}`}
+            alt={tvShow.name}
+            src={`https://image.tmdb.org/t/p/w500${tvShow.poster_path}`}
           />
         </a>
       }
     >
-      <Meta title={drama.title} />
+      <Meta title={tvShow.name} />
     </Card>
   ));
-
   return (
     <div style={{ width: '85%', margin: '3rem auto' }}>
       <Title level={2}>Recommended Diaries</Title>
@@ -165,9 +180,9 @@ function LandingPage() {
       </Title>
       <Slider {...sliderSettings}>{renderMovieCards}</Slider>
       <Title level={2} style={{ marginTop: '2rem' }}>
-        Featured Dramas
+        Featured TV Shows
       </Title>
-      <Slider {...sliderSettings}>{renderDramaCards}</Slider>
+      <Slider {...sliderSettings}>{renderTvShowsCards}</Slider>
     </div>
   );
 }

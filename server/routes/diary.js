@@ -52,35 +52,15 @@ router.post('/uploadfiles', (req, res) => {
 
 // 일기 업로드 엔드포인트
 router.post('/uploadDiary', (req, res) => {
-  console.log('Received data:', req.body);
-  const diary = new Diary({
-      writer: req.body.writer,
-      title: req.body.title,
-      description: req.body.description,
-      privacy: parseInt(req.body.privacy, 10),
-      category: parseInt(req.body.category, 10),
-      genre: parseInt(req.body.genre, 10),
-      rating: parseInt(req.body.rating, 10),
-      filePath: req.file ? req.file.path : '',
-      fileName: req.file ? req.file.filename : ''
-  });
-  // diary.save((err, doc) => {
-//       if (err) {
-//           console.error("Error saving diary:", err);
-//           return res.status(400).json({ success: false, message: "Failed to save diary", error: err.message });
-//       }
-//       res.status(200).json({ success: true, doc });
-//   });
-// });
 
-diary.save((err, doc) => {
-  if (err) {
-    console.error("Error saving diary:", err);
-    return res.status(400).json({ success: false, message: "Failed to save diary", error: err.message });
-  }
-  res.status(200).json({ success: true, doc });
-});
-});
+  //비디오 정보들을 저장
+ const diary = new Diary(req.body)
+
+ diary.save((err, doc) => {
+  if(err) return res.json({ success: false, err })
+  res.status(200).json({ success: true })
+ })
+});       
 
 // 일기 상세 정보 엔드포인트
 router.post("/getDiaryDetail", (req, res) => {
@@ -92,27 +72,27 @@ router.post("/getDiaryDetail", (req, res) => {
       });
   });
 //일기 수정
-  router.post('/updateDiary', (req, res) => {
-    Diary.findOneAndUpdate(
-      { "_id": req.body.diaryId },
-      {
-        $set: {
-          title: req.body.title,
-          description: req.body.description,
-          privacy: req.body.privacy,
-          category: req.body.category,
-          genre: req.body.genre,
-          rating: req.body.rating,
-          filePath: req.body.filePath
-        }
-      },
-      { new: true }, // Return the updated document
-      (err, doc) => {
-        if (err) return res.status(400).json({ success: false, err });
-        return res.status(200).json({ success: true, doc });
+router.post('/updateDiary', (req, res) => {
+  Diary.findOneAndUpdate(
+    { "_id": req.body.diaryId },
+    {
+      $set: {
+        title: req.body.title,
+        description: req.body.description,
+        privacy: parseInt(req.body.privacy, 10),
+        category: parseInt(req.body.category, 10),
+        genre: parseInt(req.body.genre, 10),
+        rating: parseInt(req.body.rating, 10),
+        filePath: req.body.filePath
       }
-    );
-  });
+    },
+    { new: true }, // Return the updated document
+    (err, doc) => {
+      if (err) return res.status(400).json({ success: false, err });
+      return res.status(200).json({ success: true, doc });
+    }
+  );
+});
 
 // 전체 일기 목록 엔드포인트
 router.get('/getDiarys', (req, res) => {

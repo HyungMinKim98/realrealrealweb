@@ -15,6 +15,7 @@ const EditProfilePage = () => {
     profilePhoto: ''
   });
   const [profilePic, setProfilePic] = useState(null);
+  const [preview, setPreview] = useState('');  // 이미지 미리보기를 위한 상태
   const history = useHistory();
 
   // 사용자의 정보를 불러오는 함수
@@ -47,7 +48,14 @@ const EditProfilePage = () => {
       const file = files[0];
       const formData = new FormData();
       formData.append("file", files);  // 'file'은 서버 설정과 일치해야 합니다.
-  
+
+      // 이미지 미리보기 설정
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result);
+      };
+      reader.readAsDataURL(file);
+
       try {
         const response = await axios.post('/api/users/upload-profile-photo', formData, {
           headers: {

@@ -40,8 +40,10 @@ app.use('/api/diary', require('./routes/diary'));
 
 
 //use this to show the image you have in node js server to client (react js)
-//https://stackoverflow.com/questions/48914987/send-image-path-from-node-js-express-server-to-react-client
-app.use('/uploads', express.static('uploads'));
+//https://stackoverflow.com/questions/48914987send-image-path-from-node-js-express-server-to-react-client
+
+// 업로드 폴더를 정적 파일 경로로 설정
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === "production") {

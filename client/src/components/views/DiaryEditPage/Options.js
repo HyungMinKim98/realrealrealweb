@@ -1,12 +1,12 @@
 // Options.js
 export const PrivacyOptions = [
-    { value: 0, label: "Private" },
+    { value: 0, label: "Privacy" },
     { value: 1, label: "Public" }
   ];
   
   export const CategoryOptions = [
     { value: 0, label: "Movie" },
-    { value: 1, label: "Drama" }
+    { value: 1, label: "TvShows" }
   ];
   
   export const GenreOptions = [
